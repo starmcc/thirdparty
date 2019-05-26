@@ -29,9 +29,8 @@ public class TpReadTools {
         InputStreamReader inStream = null;
         try {
             // 读取properties文件,使用InputStreamReader字符流防止文件中出现中文导致乱码
-            inStream = new InputStreamReader
-                    (TpReadTools.class.getClassLoader().getResourceAsStream(fileName),
-                            "UTF-8");
+            inStream = new InputStreamReader(TpReadTools.class.getClassLoader()
+                    .getResourceAsStream(fileName), "UTF-8");
             properties.load(inStream);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

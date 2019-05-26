@@ -6,13 +6,13 @@
     <name>thirdparty</name>
     <groupId>com.starmcc</groupId>
     <artifactId>thirdparty</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <build>
-        <!-- java版本 -->
         <plugins>
+            <!-- java版本 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -50,6 +50,44 @@
                         <goals>
                             <goal>jar</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <executions>
+                    <!-- Run shade goal on package phase -->
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <artifactSet>
+                                <excludes>
+                                    <exclude>javax.servlet:javax.servlet-api:jar:</exclude>
+                                </excludes>
+                            </artifactSet>
+                            <!-- 将依赖的某个Jar包内部的类或者资源 include/exclude 掉 -->
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                            <!-- 这里指定入口 -->
+                            <!--<transformers>-->
+                            <!--<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">-->
+                            <!--<mainClass>${groupId}.${mainClass}</mainClass>-->
+                            <!--</transformer>-->
+                            <!--</transformers>-->
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

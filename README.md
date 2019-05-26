@@ -7,7 +7,7 @@
 
 ### 引入依赖库
 
-> 下载jar包  [点击下载依赖库](<https://github.com/starmcc/thirdparty/releases>)
+> 下载jar包  [点击下载依赖库(releases)](<https://github.com/starmcc/thirdparty/releases>)
 
 > maven依赖加入该依赖库
 
@@ -16,9 +16,9 @@
     <dependency>
         <groupId>com.starmcc</groupId>
         <artifactId>thirdparty</artifactId>
-        <version>0.0.1</version>
+        <version>x.x.x</version>
         <scope>system</scope>
-        <systemPath>${basedir}/lib/thirdparty-0.0.1.jar</systemPath>
+        <systemPath>${basedir}/lib/thirdparty-x.x.x.jar</systemPath>
     </dependency>
 </dependencies>
 ```
