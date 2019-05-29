@@ -6,10 +6,18 @@
     <name>thirdparty</name>
     <groupId>com.starmcc</groupId>
     <artifactId>thirdparty</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.1</version>
+    <!-- 基础配置 -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jdk.version>1.8</jdk.version>
+        <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
+        <commons-lang3.version>3.8.1</commons-lang3.version>
+        <httpclient.version>4.5.2</httpclient.version>
+        <fastjson.version>1.2.47</fastjson.version>
+        <jdom.version>1.1</jdom.version>
     </properties>
+    <!-- 编译打包 -->
     <build>
         <plugins>
             <!-- java版本 -->
@@ -17,9 +25,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>utf-8</encoding>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
             <!-- javadoc -->
@@ -53,77 +61,40 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <executions>
-                    <!-- Run shade goal on package phase -->
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <artifactSet>
-                                <excludes>
-                                    <exclude>javax.servlet:javax.servlet-api:jar:</exclude>
-                                </excludes>
-                            </artifactSet>
-                            <!-- 将依赖的某个Jar包内部的类或者资源 include/exclude 掉 -->
-                            <filters>
-                                <filter>
-                                    <artifact>*:*</artifact>
-                                    <excludes>
-                                        <exclude>META-INF/*.SF</exclude>
-                                        <exclude>META-INF/*.DSA</exclude>
-                                        <exclude>META-INF/*.RSA</exclude>
-                                    </excludes>
-                                </filter>
-                            </filters>
-                            <!-- 这里指定入口 -->
-                            <!--<transformers>-->
-                            <!--<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">-->
-                            <!--<mainClass>${groupId}.${mainClass}</mainClass>-->
-                            <!--</transformer>-->
-                            <!--</transformers>-->
-                            <createDependencyReducedPom>false</createDependencyReducedPom>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
-
+    <!-- 依赖库 -->
     <dependencies>
         <!-- servlet -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+            <version>${javax.servlet-api.version}</version>
             <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
         <!-- apache -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.8.1</version>
+            <version>${commons-lang3.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.2</version>
+            <version>${httpclient.version}</version>
         </dependency>
         <!-- 阿里fastJSON -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.47</version>
+            <version>${fastjson.version}</version>
         </dependency>
         <!-- 微信工具包依赖 -->
         <dependency>
             <groupId>org.jdom</groupId>
             <artifactId>jdom</artifactId>
-            <version>1.1</version>
+            <version>${jdom.version}</version>
         </dependency>
     </dependencies>
 </project>
